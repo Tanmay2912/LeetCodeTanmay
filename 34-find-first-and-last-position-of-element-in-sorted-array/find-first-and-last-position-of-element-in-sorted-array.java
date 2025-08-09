@@ -1,33 +1,38 @@
-import java.util.Arrays;
-
 class Solution {
     public int[] searchRange(int[] nums, int target) {
         int ans[] = new int[2];
         Arrays.fill(ans, -1);
-
         int low = 0, high = nums.length - 1;
-        while (low <= high) {
+
+        // To find first occurrence of the element i.e. lower bound 
+        while(low <= high) {
             int mid = (low + high) / 2;
-            if (nums[mid] >= target) {
-                if (nums[mid] == target) ans[0] = mid; 
+            if(nums[mid] >= target) {
+                if(nums[mid] == target) {
+                    ans[0] = mid;
+                }
                 high = mid - 1;
-            } else {
+            }
+            else {
                 low = mid + 1;
             }
         }
 
+        // To find last occurrence of the element i.e. upper bound
         low = 0;
         high = nums.length - 1;
-        while (low <= high) {
+        while(low <= high) {
             int mid = (low + high) / 2;
-            if (nums[mid] > target) {
+            if(nums[mid] > target) {
                 high = mid - 1;
-            } else {
-                if (nums[mid] == target) ans[1] = mid;
+            }
+            else {
+                if(nums[mid] == target) {
+                    ans[1] = mid;
+                }
                 low = mid + 1;
             }
         }
-
         return ans;
     }
 }
