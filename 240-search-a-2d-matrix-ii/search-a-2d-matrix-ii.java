@@ -13,20 +13,6 @@ class Solution {
         }
         return false;
     }
-    public boolean findInColumn(int[][] matrix, int col, int target) {
-        int low = 0, high = matrix.length - 1;
-        while (low <= high) {
-            int mid = (low + high) / 2;
-            if (matrix[mid][col] == target) {
-                return true;
-            } else if (matrix[mid][col] > target) {
-                high = mid - 1;
-            } else {
-                low = mid + 1;
-            }
-        }
-        return false;
-    }
     public boolean searchMatrix(int[][] matrix, int target) {
         int rows = matrix.length;
         int cols = matrix[0].length;
@@ -38,14 +24,6 @@ class Solution {
                 }
             }
         }
-        for (int j = 0; j < cols; j++) {
-            if (target >= matrix[0][j] && target <= matrix[rows - 1][j]) {
-                if (findInColumn(matrix, j, target)) {
-                    return true;
-                }
-            }
-        }
-
         return false;
     }
 }
