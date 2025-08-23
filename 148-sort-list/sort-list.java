@@ -9,43 +9,50 @@
  * }
  */
 class Solution {
-//takesoumen collection 
     public ListNode sortList(ListNode head) {
-        if (head == null || head.next == null) return head;
-        
-        // Find the middle of the list
-        ListNode slow = head, fast = head.next;
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode slow = head;
+        ListNode fast = head.next;
+
         while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
-        
-        // Split the list
+
         ListNode mid = slow.next;
         slow.next = null;
         
         ListNode left = sortList(head);
         ListNode right = sortList(mid);
         
-        return merge(left, right);
+        return mergeList(left, right);
     }
     
-    private ListNode merge(ListNode l1, ListNode l2) {
-        ListNode dummy = new ListNode(0);
+    private ListNode mergeList(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(-1);
         ListNode tail = dummy;
         
         while (l1 != null && l2 != null) {
             if (l1.val < l2.val) {
                 tail.next = l1;
                 l1 = l1.next;
-            } else {
+            } 
+            else {
                 tail.next = l2;
                 l2 = l2.next;
             }
             tail = tail.next;
         }
         
-        tail.next = (l1 != null) ? l1 : l2;
+       if(l1 != null) {
+            tail.next = l1;
+       }
+        else {
+            tail.next = l2;
+        }
         return dummy.next;
     }
 }
