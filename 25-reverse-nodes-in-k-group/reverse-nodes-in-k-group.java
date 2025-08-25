@@ -42,7 +42,7 @@ class Solution {
             }
             nextNode = kthNode.next;
             kthNode.next = null;
-            ListNode reverseHead = reverseLinkedList(temp);
+            ListNode reverseHead = reverseLinkedList(temp); // Always store reverseHead to escape null pointer exception
             if(temp == head) {
                 head = reverseHead;
             }
