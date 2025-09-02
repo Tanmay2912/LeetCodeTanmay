@@ -1,29 +1,77 @@
-class MyHashSet {
+class ListNode {
+    int key;
+    ListNode next;
 
-    private boolean[] a;
-
-    public MyHashSet() {
-        // Initialize boolean array of size 1,000,001
-        a = new boolean[1000001];
-    }
-
-    public void add(int key) {
-        a[key] = true;
-    }
-
-    public void remove(int key) {
-        a[key] = false;
-    }
-
-    public boolean contains(int key) {
-        return a[key];
+    ListNode(int key) {
+        this.key = key;
+        this.next = null;
     }
 }
 
-/**
- * Your MyHashSet object will be instantiated and called as such:
- * MyHashSet obj = new MyHashSet();
- * obj.add(key);
- * obj.remove(key);
- * boolean param_3 = obj.contains(key);
- */
+class MyHashSet {
+    private ListNode[] set;
+
+    public MyHashSet() {
+        set = new ListNode[1000];
+    }
+
+    private int hash(int key) {
+        return key % 1000;
+    }
+
+    public void add(int key) {
+        int hash = hash(key);
+
+        if (set[hash] == null) {
+            set[hash] = new ListNode(key); 
+            return;
+        }
+
+        ListNode curr = set[hash];
+        while (true) {
+            if (curr.key == key) {
+                return; 
+            }
+            if (curr.next == null) {
+                break; 
+            }
+            curr = curr.next;
+        }
+
+        curr.next = new ListNode(key); 
+    }
+
+    public void remove(int key) {
+        int hash = hash(key);
+        ListNode curr = set[hash];
+
+        if (curr == null) return;
+
+        if (curr.key == key) {
+            set[hash] = curr.next;
+            return;
+        }
+
+        while (curr.next != null) {
+            if (curr.next.key == key) {
+                curr.next = curr.next.next;
+                return;
+            }
+            curr = curr.next;
+        }
+    }
+
+    public boolean contains(int key) {
+        int hash = hash(key);
+        ListNode curr = set[hash];
+
+        while (curr != null) {
+            if (curr.key == key) {
+                return true;
+            }
+            curr = curr.next;
+        }
+
+        return false;
+    }
+}
