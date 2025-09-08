@@ -46,11 +46,11 @@ class Solution {
         //     }
         // }
         int low = 1, high = n-1;
-        if(low == high ) {
-            ans[0] = low;
-            ans[1] = high;
-            return ans;
-        }
+        // if(low == high ) {
+        //     ans[0] = low;
+        //     ans[1] = high;
+        //     return ans;
+        // }
         while(low <= high) {
             if(!findZero(low)) {
                 low++;
