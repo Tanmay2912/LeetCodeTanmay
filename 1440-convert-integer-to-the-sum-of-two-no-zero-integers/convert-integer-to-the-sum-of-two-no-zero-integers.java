@@ -61,9 +61,10 @@ class Solution {
                 continue;
             }
             if(low+high == n) {
-                ans[0] = low;
-                ans[1] = high;
-                break;
+                return new int[] {low, high};
+                // ans[0] = low;
+                // ans[1] = high;
+                // break;
             }
             else if((low+high) > n) {
                 high--;
@@ -72,6 +73,6 @@ class Solution {
                 low++;
             }
         }
-        return ans;
+        return new int[] {-1, -1};
     }
 }
