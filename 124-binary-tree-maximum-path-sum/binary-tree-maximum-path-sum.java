@@ -33,22 +33,21 @@
     }
 }*/
 class Solution {
-    public int findMaxSum(TreeNode root, int maxSum[]) {
+    int maxSum = Integer.MIN_VALUE;
+    public int findMaxSum(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        int leftsum = Math.max(0, findMaxSum(root.left, maxSum));
-        int rightsum = Math.max(0, findMaxSum(root.right, maxSum));
+        int leftsum = Math.max(0, findMaxSum(root.left));
+        int rightsum = Math.max(0, findMaxSum(root.right));
         int sum = leftsum + rightsum + root.val;
-        maxSum[0] = Math.max(maxSum[0], sum);
+        maxSum = Math.max(maxSum, sum);
         //return root.val + leftsum + rightsum;
         return (root.val + Math.max(leftsum, rightsum)); 
     }
 
-    public int maxPathSum(TreeNode root) {
-        int maxsum[] = new int[1];
-        maxsum[0] = Integer.MIN_VALUE;
-        findMaxSum(root, maxsum);
-        return maxsum[0];
+    public int maxPathSum(TreeNode root) { 
+        findMaxSum(root);
+        return maxSum;
     }
 }
