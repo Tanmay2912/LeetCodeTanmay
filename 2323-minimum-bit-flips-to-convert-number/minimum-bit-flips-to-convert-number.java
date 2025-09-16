@@ -1,4 +1,15 @@
 class Solution {
+    public int countSetBit(int num) {
+        int cnt = 0;
+        while(num > 0) {
+            int bit = num % 2;
+            if(bit == 1) {
+                cnt++;
+            }
+            num = num / 2; 
+        }
+        return cnt;
+    }
     public int minBitFlips(int start, int goal) {
         int ans = start ^ goal;
         int cnt = 0;
@@ -7,6 +18,6 @@ class Solution {
                 cnt += 1;
             }
         }
-        return cnt;
+        return countSetBit(ans);
     }
 }
