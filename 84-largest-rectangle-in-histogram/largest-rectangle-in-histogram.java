@@ -36,6 +36,12 @@ class Solution {
         int pse[] = new int[heights.length];
         nse = findNSE(heights);
         pse = findPSE(heights);
+        for(int i = 0; i < heights.length; i++) {
+            System.out.print(nse[i] + " ");
+        }
+        for(int i = 0; i < heights.length; i++) {
+            System.out.print(pse[i] + " ");
+        }
         int maxArea = 0;
         for(int i = 0; i < heights.length; i++) {
             int area = heights[i] * (nse[i]-pse[i]-1);
