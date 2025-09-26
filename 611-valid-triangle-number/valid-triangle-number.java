@@ -1,10 +1,4 @@
 class Solution {
-    // public boolean checkValid(int a, int b, int c) {
-    //     if(a + b > c && b + c > a && a + c > b) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
     public int triangleNumber(int[] nums) {
         Arrays.sort(nums);
         int cnt = 0;
