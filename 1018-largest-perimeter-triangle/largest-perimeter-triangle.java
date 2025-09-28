@@ -1,4 +1,4 @@
-class Solution {
+/*class Solution {
     public int largestPerimeter(int[] nums) {
         Arrays.sort(nums);
         int k = nums.length-3;
@@ -9,5 +9,24 @@ class Solution {
             k--;
         }
         return 0;
+    }
+}*/
+class Solution {
+    public int largestPerimeter(int[] nums) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        for (int num : nums) {
+            pq.add(num);
+        }
+        while (pq.size() >= 3) {
+            int a = pq.poll(); 
+            int b = pq.poll(); 
+            int c = pq.poll(); 
+            if (b + c > a) {
+                return a + b + c; 
+            } 
+            pq.add(b);
+            pq.add(c);
+        }
+        return 0; 
     }
 }
