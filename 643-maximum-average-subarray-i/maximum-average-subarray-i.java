@@ -1,8 +1,8 @@
 class Solution {
     public double findMaxAverage(int[] nums, int k) {
-        if(nums.length == 1 && nums[0] == -1) {
-            return (double)nums[0];
-        }
+        // if(nums.length == 1 && nums[0] == -1) {
+        //     return (double)nums[0];
+        // }
         int i = 0, j = 0, sum = 0;
         double maxavg = Double.NEGATIVE_INFINITY;
         while(j < nums.length) {
