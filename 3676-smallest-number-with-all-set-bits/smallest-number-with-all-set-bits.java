@@ -1,4 +1,4 @@
-class Solution {
+/*class Solution {
     public int smallestNumber(int n) {
         ArrayList<Integer> bits = new ArrayList<>();
         int og = n;
@@ -15,5 +15,13 @@ class Solution {
         }
         String binary = sb.toString();
         return Integer.parseInt(binary, 2);
+    }
+}*/
+
+class Solution {
+    public int smallestNumber(int n) {
+        String binary = Integer.toBinaryString(n);
+        String replaced = binary.replace('0', '1');
+        return Integer.parseInt(replaced, 2);
     }
 }
