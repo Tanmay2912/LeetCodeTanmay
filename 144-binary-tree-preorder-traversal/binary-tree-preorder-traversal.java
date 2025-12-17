@@ -15,12 +15,17 @@
  */
 class Solution {
     public void traversal(TreeNode root, List<Integer> ans) {
-        if(root == null) {
-            return;
+        if(root == null) return;
+        Stack<TreeNode> st = new Stack<>();
+        st.push(root);
+        while(!st.isEmpty()) {
+            TreeNode top = st.pop();
+            ans.add(top.val);
+            if(top.right != null)
+                st.push(top.right);
+            if(top.left != null)
+                st.push(top.left);
         }
-        ans.add(root.val);
-        traversal(root.left, ans);
-        traversal(root.right, ans);
     }
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> ans = new ArrayList<>();
