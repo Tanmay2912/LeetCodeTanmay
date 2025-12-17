@@ -14,7 +14,16 @@
  * }
  */
 class Solution {
+    // this is recursive method to solve 
     public void traversal(TreeNode root, List<Integer> ans) {
+        if(root == null) 
+            return;
+        ans.add(root.val);
+        traversal(root.left, ans);
+        traversal(root.right, ans);
+    }
+    // this is iterative method to solve 
+    public void Traversal(TreeNode root, List<Integer> ans) {
         if(root == null) return;
         Stack<TreeNode> st = new Stack<>();
         st.push(root);
