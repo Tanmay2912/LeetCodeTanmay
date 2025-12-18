@@ -42,7 +42,6 @@ class Solution {
         int rightsum = Math.max(0, findMaxSum(root.right));
         int sum = leftsum + rightsum + root.val;
         maxSum = Math.max(maxSum, sum);
-        //return root.val + leftsum + rightsum;
         return (root.val + Math.max(leftsum, rightsum)); 
     }
 
