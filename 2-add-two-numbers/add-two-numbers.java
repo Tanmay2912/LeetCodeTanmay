@@ -22,21 +22,28 @@ class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode first = l1;
         ListNode second = l2;
+
         ListNode dummy = new ListNode(-1);
         int carry = 0;
+        
         while (first != null || second != null) {
             int x = (first != null) ? first.val : 0;
             int y = (second != null) ? second.val : 0;
+
             int sum = x + y + carry;
             carry = sum / 10;
             int digit = sum % 10;
+
             insertAtEnd(dummy, digit, 0);
+
             if (first != null) first = first.next;
             if (second != null) second = second.next;
         }
+
         if (carry > 0) {
             insertAtEnd(dummy, carry, 0);
         }
+
         return dummy.next;
     }
 }
