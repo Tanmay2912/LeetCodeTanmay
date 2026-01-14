@@ -27,7 +27,7 @@ class Solution {
                     level.add(front.val);
                 }
                 else {
-                    level.add(0, front.val); //inserting at begining for zigzag
+                    level.add(0, front.val);
                 }
                 if(front.left != null) q.offer(front.left);
                 if(front.right != null) q.offer(front.right);
@@ -43,3 +43,33 @@ class Solution {
         return ans;
     }
 }
+/*class Solution {
+    public void helper(TreeNode root, Queue<TreeNode> q, List<List<Integer>> ans) {
+        if(root == null) return;
+        q.offer(root);
+        boolean leftToRight = true;
+        while(!q.isEmpty()) {
+            int size = q.size();
+            List<Integer> level = new ArrayList<>();
+            for(int i = 0; i < size; i++) {
+                TreeNode front = q.poll();
+                if(leftToRight) {
+                    level.add(front.val);
+                }
+                else {
+                    level.add(0, front.val); //inserting at begining for zigzag
+                }
+                if(front.left != null) q.offer(front.left);
+                if(front.right != null) q.offer(front.right);
+            }
+            ans.add(level);
+            leftToRight = !leftToRight;
+        }
+    }
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        helper(root, q, ans);
+        return ans;
+    }
+}*/
