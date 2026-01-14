@@ -15,13 +15,30 @@
  */
 class Solution {
     public boolean check(TreeNode p, TreeNode q) {
-        // both null → same
+        if(p == null && q == null) {
+            return true;
+        }
+        if(p == null || q == null) {
+            return false;
+        }
+        if(p.val != q.val) {
+            return false;
+        }
+        return check(p.left, q.left) && check(p.right, q.right);
+    }
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        return check(p, q);
+    }
+}
+/*class Solution {
+    public boolean check(TreeNode p, TreeNode q) {
+        // both null -> same
         if (p == null && q == null)
             return true;
-        // one null → not same
+        // one null -> not same
         if (p == null || q == null)
             return false;
-        // values differ → not same
+        // values differ -> not same
         if (p.val != q.val)
             return false;
         // check left and right subtrees
@@ -30,4 +47,4 @@ class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {
         return check(p, q);
     }
-}
+}*/
