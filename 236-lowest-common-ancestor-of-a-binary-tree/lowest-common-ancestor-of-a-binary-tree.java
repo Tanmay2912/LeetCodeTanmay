@@ -8,6 +8,27 @@
  * }
  */
 class Solution {
+    public TreeNode lwc(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null || p == root || q == root) {
+            return root;
+        }
+        TreeNode left = lwc(root.left, p, q);
+        TreeNode right = lwc(root.right, p, q);
+        if(left == null) {
+            return right;
+        }
+        else if(right == null) {
+            return left;
+        }
+        else {
+            return root;
+        }
+    }
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        return lwc(root, p, q);
+    }
+}
+/*class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(root == null || p == root || q == root) 
             return root;
@@ -20,4 +41,4 @@ class Solution {
         else 
             return root;
     }
-}
+}*/
