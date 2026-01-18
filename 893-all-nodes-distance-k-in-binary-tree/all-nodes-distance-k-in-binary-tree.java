@@ -8,57 +8,60 @@
  * }
  */
 class Solution {
+    // this bfs traversal is to mark parent pointer in the hashmap
+    public void markParent(TreeNode root, Map<TreeNode, TreeNode> parent) {
+        if(root == null) return;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        while(!q.isEmpty()) {
+            int size = q.size();
+            for(int i = 0; i < size; i++) {
+                TreeNode front = q.poll();
+                if(front.left != null) {
+                    q.offer(front.left);
+                    parent.put(front.left, front); //child, parent
+                }
+                if(front.right != null) {
+                    q.offer(front.right);
+                    parent.put(front.right, front);
+                }
+            }
+        }
+    }
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
-        List<Integer> ans = new ArrayList<>();
-        Map<Integer, TreeNode> parent = new HashMap<>();
+        Map<TreeNode, TreeNode> parent = new HashMap<>();
+        markParent(root, parent);
+        Map<TreeNode, Boolean> visited = new HashMap<>();
         Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                TreeNode top = queue.poll();
-
-                if (top.left != null) {
-                    parent.put(top.left.val, top);
-                    queue.offer(top.left);
-                }
-
-                if (top.right != null) {
-                    parent.put(top.right.val, top);
-                    queue.offer(top.right);
-                }
-            }
-        }
-
-        Map<Integer, Integer> visited = new HashMap<>();
         queue.offer(target);
-        while (k > 0 && !queue.isEmpty()) {
+        visited.put(target, true);
+        int curr_level = 0;
+        while(!queue.isEmpty()) {
+            if(curr_level == k) break;
+            curr_level++;
             int size = queue.size();
-
-            for (int i = 0; i < size; i++) {
-                TreeNode top = queue.poll();
-
-                visited.put(top.val, 1);
-
-                if (top.left != null && !visited.containsKey(top.left.val)) {
-                    queue.offer(top.left);
+            for(int i = 0; i < size; i++) {
+                TreeNode current = queue.poll();
+                //check left 
+                if(current.left != null && visited.get(current.left) == null) {
+                    queue.offer(current.left);
+                    visited.put(current.left, true);
                 }
-
-                if (top.right != null && !visited.containsKey(top.right.val)) {
-                    queue.offer(top.right);
+                //check right
+                if(current.right != null && visited.get(current.right) == null) {
+                    queue.offer(current.right);
+                    visited.put(current.right, true);
                 }
-
-                if (parent.containsKey(top.val) && !visited.containsKey(parent.get(top.val).val)) {
-                    queue.offer(parent.get(top.val));
+                //check parent
+                if(parent.get(current) != null && visited.get(parent.get(current)) == null) {
+                    queue.offer(parent.get(current));
+                    visited.put(parent.get(current), true);
                 }
             }
-
-            k--;
         }
-
-        while (!queue.isEmpty()) {
-            ans.add(queue.poll().val);
+        List<Integer> ans = new ArrayList<>();
+        for(TreeNode node : queue) {
+            ans.add(node.val);
         }
         return ans;
     }
