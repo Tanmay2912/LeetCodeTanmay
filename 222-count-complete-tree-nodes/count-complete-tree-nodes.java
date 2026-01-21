@@ -13,7 +13,7 @@
  *     }
  * }
  */
-class Solution {
+/*class Solution {
     public int countNodes(TreeNode root) {
         if (root == null) {
             return 0;
@@ -22,8 +22,8 @@ class Solution {
         int right = countNodes(root.right);
         return 1 + left + right;
     }
-}
-/*class Solution {
+}*/
+class Solution {
     public int countNodes(TreeNode root) {
         if(root == null) {
             return 0;
@@ -51,4 +51,4 @@ class Solution {
         }
         return count;
     }
-}*/
+}
