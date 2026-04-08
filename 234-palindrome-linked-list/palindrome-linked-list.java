@@ -39,25 +39,11 @@ class Solution {
         return prev;
     }
 }
-    //     ListNode secondHalf = reverse(slow);
-    //     ListNode p1 = head;
-    //     ListNode p2 = secondHalf;
-    //     while (p2 != null) {
-    //         if (p1.val != p2.val) {
-    //             return false;
-    //         }
-    //         p1 = p1.next;
-    //         p2 = p2.next;
-    //     }
-    //     return true;
-    // }
-    // public ListNode reverse(ListNode head) {
-    //     ListNode prev = null;
-    //     ListNode curr = head;
-    //     while (curr != null) {
-    //         ListNode nextTemp = curr.next;
-    //         curr.next = prev;
-    //         prev = curr;
-    //         curr = nextTemp;
-    //     }
-    //     return prev;
+
+
+
+
+
+
+
+
