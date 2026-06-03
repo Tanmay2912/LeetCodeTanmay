@@ -21,9 +21,7 @@
 // 1 and 0 are not prime numbers 
 class Solution {
     public int countPrimes(int n) {
-
-        if (n <= 2) return 0;
-
+        //if (n <= 2) return 0;
         boolean[] isPrime = new boolean[n];
 
         for (int i = 2; i < n; i++) {
