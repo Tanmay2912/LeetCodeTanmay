@@ -1,37 +1,15 @@
 class Solution {
-    public int binarySearch(int[] prefix, int required) {
-        int low = 0, high = prefix.length-1;
-        int ans = -1;
-        while(low <= high) {
-            int mid = (low + high)/2;
-            if(prefix[mid] >= required) {
-                ans = mid;
-                high = mid - 1;
-            }
-            else {
-                low = mid + 1;
-            }
-        }
-        return ans;
-    }
     public int minSubArrayLen(int target, int[] nums) {
-        int n = nums.length;
-        if(n == 0) { return 0;}
-        int prefix[] = new int[n+1];
-        for(int i = 1; i <= n; i++) {
-            prefix[i] = prefix[i-1] + nums[i-1];
-        }
-        int minLen = Integer.MAX_VALUE;
-        for(int i = 0; i < n; i++) {
-            int required = target + prefix[i];
-            int j = binarySearch(prefix, required);
-            if(j != -1) {
-                minLen = Math.min(minLen, j-i);
+        int low = 0, high = 0, minLen = Integer.MAX_VALUE, sum = 0;
+        while(high < nums.length) {
+            sum += nums[high];
+            while(sum >= target) {
+                minLen = Math.min(minLen, high-low+1);
+                sum -= nums[low];
+                low++;
             }
+            high++;
         }
-        if(minLen == Integer.MAX_VALUE) {
-            return 0;
-        }
-        return minLen;
+        return minLen == Integer.MAX_VALUE ? 0 : minLen;
     }
 }
