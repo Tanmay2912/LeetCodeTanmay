@@ -41,6 +41,7 @@
         return result;
     }
 }*/
+// This cycle detection using Kahn's algorithm or topological sort using kahn's algo
 class Solution {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         int n = numCourses;
