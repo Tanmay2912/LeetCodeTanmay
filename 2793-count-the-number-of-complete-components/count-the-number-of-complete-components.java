@@ -1,40 +1,37 @@
 class Solution {
-    static int V, D;
+    void dfs(int u, List<List<Integer>> adj, boolean[] vis, List<Integer> comp) {
+        vis[u] = true;
+        comp.add(u);
+        for (int v : adj.get(u))
+            if (!vis[v]) dfs(v, adj, vis, comp);
+    }
 
     public int countCompleteComponents(int n, int[][] edges) {
-        List<Integer>[] A = new ArrayList[n];
-        Arrays.setAll(A, _ -> new ArrayList<>());
-
+        List<List<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i < n; i++) adj.add(new ArrayList<>());
         for (int[] e : edges) {
-            A[e[0]].add(e[1]);
-            A[e[1]].add(e[0]);
+            adj.get(e[0]).add(e[1]);
+            adj.get(e[1]).add(e[0]);
         }
 
         boolean[] vis = new boolean[n];
-        int res = 0;
+        int ans = 0;
 
         for (int i = 0; i < n; i++) {
-            boolean state = vis[i];
+            if (!vis[i]) {
+                List<Integer> comp = new ArrayList<>();
+                dfs(i, adj, vis, comp);
 
-            if (!state) {
-                V = 0; D = 0;
-
-                dfs(i, A, vis);
-
-                if (D == V * (V - 1)) res++;
+                boolean isComplete = true;
+                for (int u : comp) {
+                    if (adj.get(u).size() != comp.size() - 1) {
+                        isComplete = false;
+                        break;
+                    }
+                }
+                if (isComplete) ans++;
             }
         }
-
-        return res;
-    }
-
-    private void dfs(int x, List<Integer>[] A, boolean[] vis) {
-        V++;
-        D += A[x].size();
-        vis[x] = true;
-
-        for (int state : A[x])
-            if (!vis[state])
-                dfs(state, A, vis);
+        return ans;
     }
 }
