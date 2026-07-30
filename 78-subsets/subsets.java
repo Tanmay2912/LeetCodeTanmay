@@ -1,18 +1,19 @@
 class Solution {
-    public void generateSubsets(int[] nums, int index, List<Integer> path, List<List<Integer>> ds) {
-        if (index == nums.length) {
-            ds.add(new ArrayList<>(path)); 
+    public void generateSubsets(int[] nums, List<List<Integer>> ans, int idx, List<Integer> ds) {
+        if(idx == nums.length) {
+            ans.add(new ArrayList<>(ds));
             return;
         }
-        path.add(nums[index]);
-        generateSubsets(nums, index + 1, path, ds);
-        path.remove(path.size() - 1);
-        generateSubsets(nums, index + 1, path, ds);
+        ds.add(nums[idx]);
+        generateSubsets(nums, ans, idx+1, ds);
+        ds.remove(ds.size()-1);
+        generateSubsets(nums, ans, idx+1, ds);
     }
-    
     public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> ds = new ArrayList<>();
-        generateSubsets(nums, 0, new ArrayList<>(), ds);
-        return ds;
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> ds = new ArrayList<>();
+        int idx = 0;
+        generateSubsets(nums, ans, idx, ds);
+        return ans;
     }
 }
