@@ -1,31 +1,3 @@
-// class Solution {
-//     public int trap(int[] height) {
-//         int left = 0, right = height.length-1;
-//         int lMax = 0, rMax = 0;
-//         int total = 0;
-//         while(left < right) {
-//             if(height[left] < height[right]) {
-//                 if(height[left] > lMax) {
-//                     lMax = height[left];
-//                 }
-//                 else {
-//                     total += lMax - height[left];
-//                 } 
-//                 left++;
-//             }
-//             else {
-//                 if(height[right] >= rMax) {
-//                     rMax = height[right];
-//                 }
-//                 else {
-//                     total += rMax - height[right];
-//                 }
-//                 right--;
-//             }
-//         }
-//         return total;
-//     }
-// }
 // brute force approach 
 // here we will use prefixMax and suffixMax of the array
 // use formula (min(leftMax, rightMax)-height[i])
