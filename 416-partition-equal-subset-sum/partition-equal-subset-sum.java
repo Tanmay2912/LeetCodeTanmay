@@ -25,7 +25,7 @@ class Solution {
         int val = sum / 2;
         int dp[][] = new int[nums.length][val + 1];
         for (int i = 0; i < nums.length; i++) {
-            java.util.Arrays.fill(dp[i], -1);
+            Arrays.fill(dp[i], -1);
         }
         return subset(nums, val, nums.length - 1, dp) == 1;
     }
