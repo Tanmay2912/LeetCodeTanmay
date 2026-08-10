@@ -15,7 +15,7 @@ class Solution {
             }
             // check if left half itself is sorted
             if(nums[low] <= nums[mid]) {
-                if(nums[low] <= target && target < nums[mid]) {
+                if(nums[low] <= target && target <= nums[mid]) {
                     high = mid - 1;
                 }
                 else {
