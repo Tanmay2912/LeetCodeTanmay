@@ -1,34 +1,43 @@
 class Solution {
-    public int findMaxInArray(int[] nums) {
-        int max = nums[0];
-        for(int i = 0; i < nums.length; i++) {
-            if(nums[i] > max) {
-                max = nums[i];
-            }
-        }
-        return max;
-    }
-    public int findDivSum(int[] nums, int div) {
+    public int findDivisorSum(int[] nums, int d) {
         int sum = 0;
         for(int i = 0; i < nums.length; i++) {
-            sum += (int) Math.ceil((double) nums[i] / div);
+            sum += (int) Math.ceil((double)nums[i]/d);
         }
         return sum;
-    }
+    } 
     public int smallestDivisor(int[] nums, int threshold) {
-        int low = 1, high = findMaxInArray(nums);
-        int ans = -1;
+        int low = 1, high = 0;
+        int ans = 0;
+        for(int num : nums) {
+            high = Math.max(high, num);
+        }
         while(low <= high) {
-            int mid = (low + high)/2;
-            int value = findDivSum(nums, mid);
-            if(value <= threshold) {
+            int mid = low + (high - low) / 2;
+            int sum = findDivisorSum(nums, mid);
+            if(sum <= threshold) {
                 ans = mid;
-                high = mid - 1;
+                high = mid-1;
             }
             else {
-                low = mid + 1;
+                low = mid+1;
             }
         }
         return ans;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
