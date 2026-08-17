@@ -2,8 +2,6 @@ class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         Stack<Integer> st = new Stack<>();
         Map<Integer, Integer> mp = new HashMap<>();
-        int ans[] = new int[nums1.length];
-        int j = nums1.length-1;
         for(int i = nums2.length-1; i >= 0; i--) {
             int curr = nums2[i];
             while(!st.isEmpty() && st.peek() <= curr) {
