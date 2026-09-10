@@ -13,37 +13,66 @@
  *     }
  * }
  */
+// class Solution {
+//     // this is recursive method
+//     public void Traversal(TreeNode root, List<Integer> ans) {
+//         if(root == null) 
+//             return;
+//         traversal(root.left, ans);
+//         traversal(root.right, ans);
+//         ans.add(root.val);
+//     }
+//     // this is iterative method
+//     public void traversal(TreeNode root, List<Integer> ans) {
+//         if(root == null) return;
+//         Stack<TreeNode> st1 = new Stack<>();
+//         Stack<TreeNode> st2 = new Stack<>();
+//         st1.push(root);
+//         while(!st1.isEmpty()) {
+//             root = st1.pop();
+//             st2.push(root);
+//             if(root.left != null) 
+//                 st1.push(root.left);
+//             if(root.right != null)
+//                 st1.push(root.right);
+//         }
+//         while(!st2.isEmpty()) {
+//             TreeNode node = st2.pop();
+//             ans.add(node.val);
+//         }
+//     }
+//     public List<Integer> postorderTraversal(TreeNode root) {
+//         List<Integer> ans = new ArrayList<Integer>();
+//         traversal(root, ans);
+//         return ans;
+//     }
+// }
+
 class Solution {
-    // this is recursive method
-    public void Traversal(TreeNode root, List<Integer> ans) {
-        if(root == null) 
+    public void iterativePostOrder(TreeNode root, List<Integer> list) {
+        if (root == null) {
             return;
-        traversal(root.left, ans);
-        traversal(root.right, ans);
-        ans.add(root.val);
-    }
-    // this is iterative method
-    public void traversal(TreeNode root, List<Integer> ans) {
-        if(root == null) return;
+        }
         Stack<TreeNode> st1 = new Stack<>();
         Stack<TreeNode> st2 = new Stack<>();
         st1.push(root);
-        while(!st1.isEmpty()) {
-            root = st1.pop();
-            st2.push(root);
-            if(root.left != null) 
-                st1.push(root.left);
-            if(root.right != null)
-                st1.push(root.right);
+        while (!st1.isEmpty()) {
+            TreeNode node = st1.pop();
+            st2.push(node);
+            if (node.left != null) {
+                st1.push(node.left);
+            }
+            if (node.right != null) {
+                st1.push(node.right);
+            }
         }
-        while(!st2.isEmpty()) {
-            TreeNode node = st2.pop();
-            ans.add(node.val);
+        while (!st2.isEmpty()) {
+            list.add(st2.pop().val);
         }
     }
     public List<Integer> postorderTraversal(TreeNode root) {
-        List<Integer> ans = new ArrayList<Integer>();
-        traversal(root, ans);
-        return ans;
+        List<Integer> list = new ArrayList<>();
+        iterativePostOrder(root, list);
+        return list;
     }
 }
